@@ -16,7 +16,7 @@ var colorBrown = "#986928";
 var curColor = colorPurple;
 var clickColor = new Array();
 
-var baseImage = new Array();
+
 
 function handleImage(e) {
     var reader = new FileReader();
@@ -35,26 +35,63 @@ function handleImage(e) {
 target_canvas = document.getElementById('target-canvas');
 target_context = target_canvas.getContext("2d");
 
-document.getElementById("inputLoader").addEventListener('change', handleImage, false);
-document.getElementById("targetLoader").addEventListener('change',
-    e => {
-        var reader = new FileReader();
+canvas = document.getElementById('canvas')
+context = document.getElementById('canvas').getContext("2d");
 
+var baseImage = new Array();
 
-        reader.onload = function (event) {
-            var img = new Image();
-            img.onload = function () {
-                target_canvas.width = img.width;
-                target_canvas.height = img.height;
-                target_context.drawImage(img, 0, 0);
+$("#button-load-data").mousedown(e => {
+    $.ajax({
+        type:"GET",
+        url: "http://127.0.0.1:5002/api/get",
+        dataType: 'application/json;charset=UTF-8',
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        success: function (data) { 
+            data = JSON.parse(data);
+            // console.log(data)
+            var target_image = new Image();
+            target_image.src = data.targetDataURL;
+            target_image.onload = function () {
+                target_context.drawImage(target_image, 0, 0);
             }
-            img.src = event.target.result;
+            target_canvas.width = target_image.width;
+            target_canvas.height = target_image.height;
+
+            var input_image = new Image();
+            input_image.src = data.inputDataURL;
+            input_image.onload = function () {
+                context.drawImage(input_image, 0, 0);
+            }
+            baseImage.push(input_image);
+            canvas.width = input_image.width;
+            canvas.height = input_image.height;
+        },
+        error: function (data) {
+            // SUPER UGLY HACK!!!
+            data = JSON.parse(data.responseText);
+            // console.log(data)
+            var target_image = new Image();
+            target_image.src = data.targetDataURL;
+            target_image.onload = function () {
+                target_canvas.width = target_image.width;
+                target_canvas.height = target_image.height;
+                target_context.drawImage(target_image, 0, 0);
+
+            }
+
+            var input_image = new Image();
+            input_image.src = data.inputDataURL;
+            input_image.onload = function () {
+                canvas.width = input_image.width;
+                canvas.height = input_image.height;
+                context.drawImage(input_image, 0, 0);
+            }
+            baseImage.push(input_image);
         }
-        reader.readAsDataURL(e.target.files[0]);
-    }
-
-
-    , false);
+    });
+});
 
 $("#button-class-1").mousedown(e => {
     curColor = colorGreen;
@@ -70,7 +107,7 @@ $("#button-class-3").mousedown(e => {
 
 
 
-context = document.getElementById('canvas').getContext("2d");
+
 
 $('#canvas').mousedown(function (e) {
     var mouseX = e.pageX - this.offsetLeft;

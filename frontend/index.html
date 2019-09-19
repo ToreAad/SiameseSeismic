@@ -10,34 +10,32 @@
     <div>
         <div>
             <div>
-                <input type="file" id="loadData" name="loadData">Load data</input>
-            </div>
-            <div id="left-container">
-                <div>
-                    <input type="file" id="inputLoader" name="inputLoader">Load data</input>
-                </div>
-
-                <div>
-                    <canvas id="canvas" width="400" height="400" style="border:1px solid black;"></canvas>
-                </div>
-
-                <div>
-                    <button type="button" id="button-class-1">Class 1</button>
-                    <button type="button" id="button-class-2">Class 2</button>
-                    <button type="button" id="button-class-3">Class 3</button>
-                    <button type="button" id="button-clear">Clear canvas</button>
-                </div>
-                <div>
-                    <button type="button" id="button-classify">Classify</button>
-                </div>
+                <button type="button" id="button-load-data" class="button">Load data</button>
             </div>
 
-            <div id="right-container">
+            <div>
                 <div>
-                    <input type="file" id="targetLoader" name="targetLoader">Load data</input>
-                </div>
-                <div>
-                    <canvas id="target-canvas" width="400" height="400" style="border:1px solid black;"></canvas>
+                        <div id="left-container" >
+                                <div>
+                                    <canvas id="canvas" width="400" height="400" style="border:1px solid black;"></canvas>
+                                </div>
+                
+                                <div>
+                                    <button type="button" id="button-class-1" class="button">Class 1</button>
+                                    <button type="button" id="button-class-2" class="button">Class 2</button>
+                                    <button type="button" id="button-class-3" class="button">Class 3</button>
+                                    <button type="button" id="button-clear" class="button">Clear canvas</button>
+                                </div>
+                                <div>
+                                    <button type="button" id="button-classify">Classify</button>
+                                </div>
+                            </div>
+                
+                            <div id="right-container">
+                                <div>
+                                    <canvas id="target-canvas" width="400" height="400" style="border:1px solid black;"></canvas>
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>
