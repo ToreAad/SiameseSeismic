@@ -69,7 +69,7 @@ def train_base_model(model, train_generator, epochs):
 
 def main():
     batch_size = 4
-    train_dir = "./pointDatasets"
+    train_dir = "./data/pointDatasets"
     in_shape = (16, 16, 16)
     steps_per_epoch = 100
     # save_path = "trained_base_model.h5"

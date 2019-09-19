@@ -68,7 +68,7 @@ def train_siamese_model(model, train_generator, out_dim ):
 
 if __name__ == "__main__":
     batch_size = 4
-    train_dir = "./pointDatasets"
+    train_dir = "./data/pointDatasets"
     in_shape = (16, 16, 16)
     embedding_shape = 64
     steps_per_epoch = 500
@@ -76,4 +76,4 @@ if __name__ == "__main__":
     bitvector_model = initialize_bitvector_model(in_shape, embedding_shape)
     siamese_model = tripletize(in_shape, bitvector_model)
     train_siamese_model(siamese_model, train_generator, embedding_shape)
-    # freeze(bitvector_model).save(model_path(out_name))
+    freeze(bitvector_model).save("./mlModels/trainedSiameseNetwork.h5")

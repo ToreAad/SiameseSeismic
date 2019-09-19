@@ -29,7 +29,7 @@ def pts_to_ixt(fname, dt=0.004):
     return ixt
 
 print("Loading seismic")
-f3 = segyio.tools.cube("./F3_entire.segy")
+f3 = segyio.tools.cube("./data/F3_entire.segy")
 print("Seismic loaded")
 
 class Singlet(Sequence):
@@ -97,7 +97,7 @@ class Triplet(Singlet):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     base_batch_size = 4
-    train_dir = "./pointDatasets/"
+    train_dir = "./data/pointDatasets/"
     shape = (32,32, 32)
     steps_per_epoch = 16
     print("### Testing Singlet generator class ###")
