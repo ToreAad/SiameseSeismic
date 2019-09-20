@@ -1,5 +1,8 @@
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+import random
 
 
 
@@ -15,14 +18,20 @@ def get_knn_classifier(embedding_array, label_array):
     for i in range(mx):
         for t in range(my):
             X.append(embedding_array[:,i, t])
-            y.append(labels[i,t,:])
-    cls = KNeighborsClassifier(n_neighbors=5)
-    cls.fit(X, y)
-    return cls
+            r,g,b,a = labels[i,t,:]
+            y.append((r,g,b,a))
+    encode = dict((key, val) for val, key in enumerate(set(y)))
+    decode = dict((key, val) for val, key in encode.items())
+    y_ = [encode[v] for v in y]
+    clf = RandomForestClassifier()
+    print("Fitting classifier")
+    selection = random.sample(list(range(len(X))), 5000)
+    clf.fit([X[i] for i in selection], [y_[i] for i in selection])
+    return clf, decode
 
 def do_prediction(input_embedding, labels, target_embedding):
     print("Training classifier")
-    cls = get_knn_classifier(input_embedding, np.rot90(labels,3))
+    clf, decode = get_knn_classifier(input_embedding, np.rot90(labels,3))
     print("Finished training classifier")
 
     (_, mx, my) = target_embedding.shape
@@ -36,15 +45,15 @@ def do_prediction(input_embedding, labels, target_embedding):
             predict_on.append(target_embedding[:,i,t])
 
     print("Running classifier")
-    predicted = cls.predict(predict_on)
+    predicted = clf.predict(predict_on)
     print("finished classifying")
 
     done = 0
     for i in range(mx):
         for t in range(my):
-            result[i, t, :] = predicted[done]
+            prediction = predicted[done]
+            (r,g,b,a) = decode[prediction]
+            result[i, t, :] = np.array([r,g,b,a])
             done += 1
-    
-    return result
 
-    
+    return result

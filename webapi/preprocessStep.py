@@ -15,8 +15,7 @@ target_slice = f3[-216:-200, :512, :512]
 # plt.imshow(target_slice[0,:,:])
 # plt.show()
 
-print(input_slice.shape)
-print(target_slice.shape)
+
 
 np.save("input_slice.npy", input_slice)
 np.save("target_slice.npy", target_slice)
@@ -27,7 +26,6 @@ model = load_model("./mlModels/trainedSiameseNetwork.h5")
 
 mi_em = mi-16-mi%16
 mt_em = mt-16-mt%16
-print(mi_em, mt_em)
 input_embedding = np.zeros((64, mi_em, mt_em))
 target_embedding = np.zeros((64, mi_em, mt_em))
 

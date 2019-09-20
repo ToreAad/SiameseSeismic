@@ -20,7 +20,8 @@ def getArray(dataurlb64):
     offset = len('data:image/png;base64,')
     dataURL = dataurlb64[offset:]
     binary_data = a2b_base64(dataURL)
-    return np.array(Image.open(BytesIO(binary_data)))
+    image = Image.open(BytesIO(binary_data))
+    return np.array(image.convert('P', palette=Image.ADAPTIVE, colors=5).convert('RGBA'))
 
 def getBase64(pil_img):
     sio = BytesIO()
