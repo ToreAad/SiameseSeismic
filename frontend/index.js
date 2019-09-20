@@ -144,6 +144,7 @@ $('#button-clear').mousedown(e => {
     clearArray(clickY);
     clearArray(clickDrag);
     clearArray(clickColor)
+    redraw()
 })
 
 var clickX = new Array();
