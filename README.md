@@ -16,7 +16,7 @@ parcel from https://parceljs.org/ for website
 * Open browser at http://127.0.01:1234
 
 # Issues:
-K-nearest neighbour classifer is too slow, each prediction takes n log n time where n is amount of training data. Makes the webpage almost unusable, because getting predictions from the knn classifier takes minutes...
+K-nearest neighbour classifer is too slow, each prediction takes n log n time where n is amount of training data and we do this operation m^2 times where m is size of image being classified, this makes doing single prediction basically k^3 log k... 
 
 # Attributions:
 The siamese neural network code is adapted from https://github.com/ketil-malde/plankton-siamese. 
