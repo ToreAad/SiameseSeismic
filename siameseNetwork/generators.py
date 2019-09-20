@@ -6,11 +6,16 @@ import os
 from tensorflow.keras.utils import Sequence
 
 def read_odt_pts(fname):
+    """
+    Author of function was https://github.com/kwinkunks
+    """
     data = np.loadtxt(fname, skiprows=6, comments='!', usecols=[0,1,2])
     return data
 
-
 def pts_to_ixt(fname, dt=0.004):
+    """
+    Author of function was https://github.com/kwinkunks
+    """
     f3_corners_xy = np.array([
     [605835.5, 6073556.3],
     [629576.3, 6074219.9],

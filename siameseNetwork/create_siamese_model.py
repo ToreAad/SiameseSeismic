@@ -62,7 +62,7 @@ def train_siamese_model(model, train_generator, out_dim ):
 
     history = model.fit_generator(
         train_generator,
-        epochs=25)
+        epochs=50)
 
     return history
 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     train_dir = "./data/pointDatasets"
     in_shape = (16, 16, 16)
     embedding_shape = 64
-    steps_per_epoch = 500
+    steps_per_epoch = 1000
     train_generator = Triplet(batch_size=batch_size, directory=train_dir, steps_per_epoch=steps_per_epoch, shape=in_shape)
     bitvector_model = initialize_bitvector_model(in_shape, embedding_shape)
     siamese_model = tripletize(in_shape, bitvector_model)

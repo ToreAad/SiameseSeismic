@@ -1,0 +1,13 @@
+tensorflow-gpu
+pyshp
+flask-restful
+flask-cors
+pillow
+skimage
+requests
+nest_asyncio
+segyio
+nb_jupyter
+scikit-image
+scikit-learn
+bruges

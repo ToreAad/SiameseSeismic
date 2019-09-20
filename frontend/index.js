@@ -214,6 +214,8 @@ $("#button-classify").mousedown(e => {
             var target_interpretation = new Image();
             target_interpretation.src = data.targetDataURL;
             target_interpretation.onload = function () {
+                target_canvas.width = target_interpretation.width;
+                target_canvas.height = target_interpretation.height;
                 target_context.drawImage(target_interpretation, 0, 0);
             }
             // console.log('There was an error');
